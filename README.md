@@ -1,8 +1,8 @@
 # ComfyUI on the Radeon RX 6800 (gfx1030, Windows ROCm)
 
 Runtime fixes, workflow graphs and benchmark notes behind the post
-*ComfyUI on the RX 6800: fixing INT8, GPU VAE decode, and VRAM spill*
-(shino.dev, October 2026).
+[ComfyUI on the RX 6800: fixing INT8, GPU VAE decode, and VRAM spill](https://shino.dev/posts/comfyui-rx6800/)
+(shino.dev, October 2026; [Japanese version](https://shino.dev/ja/posts/comfyui-rx6800/)).
 
 This is a snapshot of one tested setup, not a maintained project. The fixes target the
 exact versions listed below and may stop working, or become unnecessary, with other
