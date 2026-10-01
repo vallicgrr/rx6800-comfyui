@@ -8,8 +8,9 @@ gfx1030, so comfy_kitchen's eager int8_linear is replaced on gfx1030 with the sa
 (per-row activation quantization, INT8 GEMM, scales) through rocblas_gemm_ex via ctypes.
 
 Conv3d: MIOpen has no CK kernels for gfx1030, so 3D convs run 3-6x slower than the
-same work as per-time-tap Conv2d calls; long kernels also trip Windows TDR ("unspecified
-launch failure" in video VAE decode).
+same work as per-time-tap Conv2d calls. GPU video VAE decode also failed with HIP
+"unspecified launch failure" before this change; a Windows GPU timeout (TDR) on long
+kernels is a plausible cause, not an established one.
 
 Conv1d: the only MIOpen solvers for MiniMax Music 3's dilated audio-VAE convs are a naive
 kernel and a GEMM needing a workspace PyTorch does not pass; one matmul per kernel tap is

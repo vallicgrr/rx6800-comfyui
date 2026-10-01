@@ -66,7 +66,7 @@ original FP32/FP16 fallbacks that the report describes as intermediate steps.
 | Fix | Problem on this setup | Effect measured |
 | --- | --- | --- |
 | INT8 linear through rocBLAS | `torch._int_mm` uses hipBLASLt, which has no gfx1030 kernels (`HIPBLAS_STATUS_INVALID_VALUE`). rocBLAS does have INT8 GEMM kernels for gfx1030 (generic "fallback" builds), called here through ctypes with a fixed 64 MB workspace so it is safe under HIP graph capture. | MiniMax Music 3 runs at all; vs an FP16 dequantize path: 2-row decode 2.1 → 1.0 ms, Qwen-Image 2.1 137 → 105 s |
-| Conv3d as per-tap Conv2d | MIOpen has no CK kernels for gfx1030; 3D convs run slowly and long kernels hit `unspecified launch failure` | LTX 2.3 video VAE decode 44 s (CPU) → 1.9 s (GPU) |
+| Conv3d as per-tap Conv2d | MIOpen has no CK kernels for gfx1030, so 3D convs run slowly; GPU video decode had also failed with `unspecified launch failure` (a Windows GPU timeout is plausible but unconfirmed) | LTX 2.3 video VAE decode 44 s (CPU) → 1.9 s (GPU) |
 | Conv1d as per-tap matmul | Dilated audio-VAE convs only get MIOpen's naive kernel (the GEMM solver needs a workspace PyTorch does not pass) | 436 → 9 ms per layer; MiniMax 20 s decode 125 → 2.5 s |
 | Chunked attention | No memory-efficient SDPA kernel for gfx1030; large score matrices spill into system memory | H3 ~6 min → ~34 s/step; Hunyuan3D refinement no longer stalls |
 | MiniMax Music 3 AR depth decoder in FP16 | The 4-layer depth decoder re-dequantizes 570M INT8 weights 7× per token | ~1.1 GB extra VRAM during generation; AR 2:52 → 2:07 per 20 s song |

@@ -9,11 +9,12 @@ final Music RX rows, the measured seeds differ from these base graphs:
 and the archived Music graphs use 527001. Apply the RX override to all seed
 inputs in the corresponding Music graph. measured-runs.json records these overrides.
 
-This is a workflow archive, not a complete installation kit. It contains no model
-weights, custom-node implementations, or RX runtime patches. The article describes
-the tested ComfyUI/PyTorch versions. The RX timing depends on the local helper node,
-comfy_kitchen changes, and H3 GGUF loader changes described in the lab report.
-GGUF, LTXVideo and Hunyuan3DWrapper nodes must be available for their graphs.
+This folder holds only the workflow graphs. The RX runtime changes are elsewhere in
+this repository: the helper node in ComfyUI-RX6800-Fixes/ (including the INT8 path
+that the measured runs applied to comfy_kitchen directly) and the H3 GGUF loader
+changes in patches/. The top-level README lists the tested ComfyUI/PyTorch versions.
+Model weights are not included. GGUF, LTXVideo and Hunyuan3DWrapper nodes must be
+available for their graphs.
 
 The Hunyuan3D source image is included under input/. Place it in your ComfyUI input
 folder, respecting the image path in the selected graph (780M uses rx6800_bench/).
