@@ -1,0 +1,108 @@
+{
+ "1": {
+  "inputs": {
+   "unet_name": "minimax_music3_dit_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  },
+  "class_type": "UNETLoader"
+ },
+ "2": {
+  "inputs": {
+   "type": "minimax",
+   "clip_name": "minimax_music3_text_encoder_pruned_int8_convrot.safetensors",
+   "device": "default"
+  },
+  "class_type": "CLIPLoader"
+ },
+ "3": {
+  "inputs": {
+   "vae_name": "minimax_music3_dav.safetensors"
+  },
+  "class_type": "VAELoader"
+ },
+ "4": {
+  "inputs": {
+   "seed": 527001,
+   "caption": "Global Metadata: Minimal Japanese art-pop, 96 BPM, A minor. A complete two-minute song with a full structure: short intro, verse, chorus, second verse, chorus, bridge, final chorus, brief outro. Wistful but quietly hopeful, late-night city rain mood.\n\nVocal Details: Soft androgynous Japanese lead vocal, close-mic and breathy, clear diction. Light harmony enters on the second chorus and stays through the final chorus. No spoken dialogue.\n\nArrangement: Warm felt piano, rounded bass, brushed electronic kick, soft rim-click snare, subtle tape hiss, one glassy synth line. Start with piano alone, bring in the beat under the first verse, open the harmony on each chorus, thin out to piano and voice for the bridge, return with the full arrangement for the final chorus, end on a gentle unresolved piano note.",
+   "max_duration": 120.0,
+   "top_k": 50,
+   "clip": [
+    "2",
+    0
+   ],
+   "lyrics": "[Intro]\n\n[Verse 1]\nRain draws a map across the glass\nNeon rivers slowly pass\nI keep one small light awake\nFor the morning we will make\n\n[Chorus]\nEven in the blue hour, we begin again\nCounting every streetlight till the long night ends\nHold the little warmth we found\nEven in the blue hour, we begin again\n\n[Verse 2]\nTrains go quiet one by one\nPuddles hold a borrowed sun\nEvery window tells a tale\nPaper boats that learn to sail\n\n[Chorus]\nEven in the blue hour, we begin again\nCounting every streetlight till the long night ends\nHold the little warmth we found\nEven in the blue hour, we begin again\n\n[Bridge]\nIf the city never sleeps\nI will keep the time you keep\nSoft as rain on silver wire\nOne small spark, one small fire\n\n[Final Chorus]\nEven in the blue hour, we begin again\nCounting every streetlight till the long night ends\nHold the little warmth we found\nEven in the blue hour, we begin again\n\n[Outro]\nWe begin again",
+   "cfg_scale": 1.7
+  },
+  "class_type": "MiniMaxMusic3TextEncode"
+ },
+ "5": {
+  "inputs": {
+   "conditioning": [
+    "4",
+    0
+   ]
+  },
+  "class_type": "ConditioningZeroOut"
+ },
+ "6": {
+  "inputs": {
+   "batch_size": 1,
+   "seconds": 120.0
+  },
+  "class_type": "EmptyMiniMaxMusic3LatentAudio"
+ },
+ "7": {
+  "inputs": {
+   "steps": 30,
+   "negative": [
+    "5",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "sampler_name": "euler",
+   "cfg": 1.7,
+   "scheduler": "simple",
+   "denoise": 1.0,
+   "model": [
+    "1",
+    0
+   ],
+   "latent_image": [
+    "6",
+    0
+   ],
+   "seed": 527001
+  },
+  "class_type": "KSampler"
+ },
+ "8": {
+  "inputs": {
+   "vae": [
+    "3",
+    0
+   ],
+   "samples": [
+    "7",
+    0
+   ],
+   "overlap": 64,
+   "tile_size": 1536
+  },
+  "class_type": "VAEDecodeAudioTiled"
+ },
+ "9": {
+  "inputs": {
+   "format.quality": "V0",
+   "audio": [
+    "8",
+    0
+   ],
+   "format": "mp3",
+   "filename_prefix": "rx6800/minimax_music3_120s_full"
+  },
+  "class_type": "SaveAudioAdvanced"
+ }
+}

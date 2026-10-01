@@ -1,0 +1,97 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image"
+  }
+ },
+ "3": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "prompt": "Cinematic wide photograph of a compact black mini PC on a dark slate desk, placed toward the right side of the frame. Floating just above it, a thin pane of clear glass holds a small red glass potion bottle with a cork, cleanly cut out with nothing behind it, as if lifted straight off its background. One warm amber light glows from the mini PC's vents, restrained teal ambient light in the background. The left third of the frame is quiet, dark, empty negative space. Dark slate palette, shallow depth of field, fine film grain, moody and minimal.",
+   "negative_prompt": "text, letters, words, writing, captions, logo, watermark, signature, user interface, screen text, numbers",
+   "resolution": 1024,
+   "images": []
+  }
+ },
+ "6": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "7": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 640,
+   "batch_size": 1
+  }
+ },
+ "8": {
+  "class_type": "KSampler",
+  "inputs": {
+   "seed": 7201,
+   "steps": 25,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0,
+   "model": [
+    "1",
+    0
+   ],
+   "positive": [
+    "3",
+    0
+   ],
+   "negative": [
+    "3",
+    1
+   ],
+   "latent_image": [
+    "7",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "VAEDecodeTiled",
+  "inputs": {
+   "samples": [
+    "8",
+    0
+   ],
+   "vae": [
+    "6",
+    0
+   ],
+   "tile_size": 512,
+   "overlap": 64,
+   "temporal_size": 64,
+   "temporal_overlap": 8
+  }
+ },
+ "10": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "filename_prefix": "780m_bench/og_qwen21_s7201",
+   "images": [
+    "9",
+    0
+   ]
+  }
+ }
+}

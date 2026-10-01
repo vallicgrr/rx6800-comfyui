@@ -1,0 +1,46 @@
+--- a/loader.py
++++ b/loader.py
+@@ -98,7 +98,10 @@
+     compat = None
+     arch_str = get_field(reader, "general.architecture", str)
+     type_str = get_field(reader, "general.type", str)
+-    if arch_str in [None, "pig", "cow"]:
++    if arch_str is None and is_text_model and any(k.startswith("model.layers.") for k, _ in tensors):
++        # ComfyUI/HF-layout text encoder (e.g. MiniMax H3 Qwen3-VL); keys load as-is
++        compat = "comfy"
++    elif arch_str in [None, "pig", "cow"]:
+         if is_text_model:
+             raise ValueError(f"This gguf file is incompatible with llama.cpp!\nConsider using safetensors or a compatible gguf file\n({path})")
+         compat = "sd.cpp" if arch_str is None else arch_str
+@@ -506,6 +509,10 @@
+         if arch == "qwen2vl":
+             vsd = gguf_mmproj_loader(path)
+             sd.update(vsd)
+-    else:
+-        pass
++    elif arch is None:
++        # GGUF caps tensors at 4 dims, so the 5-D Qwen-VL patch-embed conv [C, 3, T, H, W] was stored as [C*3, T, H, W]
++        temb_key = "visual.patch_embed.proj.weight"
++        if temb_key in sd and len(sd[temb_key].shape) == 4:
++            w = dequantize_tensor(sd[temb_key], dtype=torch.bfloat16)
++            sd[temb_key] = w.reshape(w.shape[0] // 3, 3, *w.shape[1:])
+     return sd
+--- a/tools/convert.py
++++ b/tools/convert.py
+@@ -145,8 +145,14 @@
+         ("cap_embedder.1.weight", "context_refiner.0.attention.qkv.weight")
+     ]
+ 
+-arch_list = [ModelFlux, ModelSD3, ModelAura, ModelHiDream, CosmosPredict2, 
+-             ModelLTXV, ModelHyVid, ModelWan, ModelSDXL, ModelSD1, ModelLumina2]
++class ModelMiniMaxH3(ModelTemplate):
++    arch = "minimax_h3"
++    keys_detect = [
++        ("adaln_t_table", "video_patch_proj.weight", "audio_patch_proj.weight"),
++    ]
++
++arch_list = [ModelFlux, ModelSD3, ModelAura, ModelHiDream, CosmosPredict2,
++             ModelLTXV, ModelHyVid, ModelWan, ModelSDXL, ModelSD1, ModelLumina2, ModelMiniMaxH3]
+ 
+ def is_model_arch(model, state_dict):
+     # check if model is correct

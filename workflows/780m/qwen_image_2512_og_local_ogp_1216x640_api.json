@@ -1,0 +1,100 @@
+{
+ "1": {
+  "class_type": "UnetLoaderGGUF",
+  "inputs": {
+   "unet_name": "qwen-image-2512-Q4_K_M.gguf"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "text": "A compact unbranded mini computer on a dark desk drives a two-stage publishing apparatus. A text-free amber image plane emerges from the computer, passes through a precise teal glass registration frame, and divides into two clean wide social-card panels with empty aligned title bands, suggesting bilingual layout without visible characters. Dark muted palette, deep slate and charcoal with restrained teal structure and one warm amber light. Cinematic wide shot, shallow depth of field, soft volumetric haze, tactile glass and metal, fine 35mm film grain. Composition weighted to the right two-thirds; the left third is calm, empty negative space with no detail. No text, no letters, no words, no numbers, no logos, no watermark, no signature, no readable interface."
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "text": "text, letters, words, numbers, watermark, logo, signature, UI, interface, busy detail on the left, oversaturated, neon, cartoon, people, faces"
+  }
+ },
+ "6": {
+  "class_type": "EmptySD3LatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 640,
+   "batch_size": 1
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "6",
+    0
+   ],
+   "seed": 1405,
+   "steps": 20,
+   "cfg": 2.5,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "780m_bench/og_local_ogp_qwen_image_2512"
+  }
+ }
+}

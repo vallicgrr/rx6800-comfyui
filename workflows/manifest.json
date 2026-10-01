@@ -1,0 +1,386 @@
+{
+  "rx6800/hunyuan3d2mini_knight_fullbody_api.json": {
+    "nodes": [
+      "Hy3DExportMesh",
+      "Hy3DGenerateMesh",
+      "Hy3DModelLoader",
+      "Hy3DPostprocessMesh",
+      "Hy3DVAEDecode",
+      "LoadImage"
+    ],
+    "file_inputs": [
+      "rx6800_knight_front_518_masked.png"
+    ]
+  },
+  "rx6800/ltx23_512x288_97f_gpuvae_api.json": {
+    "nodes": [
+      "CreateVideo",
+      "EmptyLTXVLatentVideo",
+      "KSampler",
+      "LTXVAudioVAEDecode",
+      "LTXVConcatAVLatent",
+      "LTXVConditioning",
+      "LTXVEmptyLatentAudio",
+      "LTXVLoadConditioning",
+      "LTXVSeparateAVLatent",
+      "LTXVTiledVAEDecode",
+      "ModelSamplingLTXV",
+      "SaveVideo",
+      "UnetLoaderGGUF",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "ltx-2.3-22b-distilled-Q2_K.gguf",
+      "ltx-2.3-22b-distilled_audio_vae.safetensors",
+      "ltx-2.3-22b-distilled_video_vae.safetensors"
+    ]
+  },
+  "rx6800/ltx25_Q3_512x288_97f_25steps_gpuvae_api.json": {
+    "nodes": [
+      "CreateVideo",
+      "EmptyLTXVLatentVideo",
+      "KSamplerSelect",
+      "LTXVAudioVAEDecode",
+      "LTXVConcatAVLatent",
+      "LTXVConditioning",
+      "LTXVDualCFGGuider",
+      "LTXVEmptyLatentAudio",
+      "LTXVLoadConditioning",
+      "LTXVScheduler",
+      "LTXVSeparateAVLatent",
+      "LTXVTiledVAEDecode",
+      "ModelSamplingLTXV",
+      "RandomNoise",
+      "SamplerCustomAdvanced",
+      "SaveVideo",
+      "UnetLoaderGGUF",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "ltx-2.5-Q3_K_S.gguf",
+      "ltx-2.5-audio-vae-bf16.safetensors",
+      "ltx-2.5-video-vae-conv-bf16.safetensors"
+    ]
+  },
+  "rx6800/minimax_h3_q3kxl_t2va_640x384_turbo_api.json": {
+    "nodes": [
+      "BasicGuider",
+      "BasicScheduler",
+      "CLIPLoaderGGUF",
+      "CreateVideo",
+      "KSamplerSelect",
+      "LoraLoaderModelOnly",
+      "MiniMaxH3ImageToVideo",
+      "RandomNoise",
+      "SamplerCustomAdvanced",
+      "SaveVideo",
+      "UnetLoaderGGUF",
+      "VAEDecode",
+      "VAEDecodeAudio",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_h3_audio_vae_fp32.safetensors",
+      "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+      "minimax_h3_fl2va_pruned-UD-Q3_K_XL.gguf",
+      "minimax_h3_video_vae_fp16.safetensors",
+      "qwen3vl_32b_minimax_h3-Q2_K_M.gguf"
+    ]
+  },
+  "rx6800/minimax_h3_t2va_768x448_turbo_api.json": {
+    "nodes": [
+      "BasicGuider",
+      "BasicScheduler",
+      "CLIPLoaderGGUF",
+      "CreateVideo",
+      "KSamplerSelect",
+      "LoraLoaderModelOnly",
+      "MiniMaxH3ImageToVideo",
+      "RandomNoise",
+      "SamplerCustomAdvanced",
+      "SaveVideo",
+      "UnetLoaderGGUF",
+      "VAEDecode",
+      "VAEDecodeAudio",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_h3_audio_vae_fp32.safetensors",
+      "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+      "minimax_h3_fl2va_pruned-Q2_K.gguf",
+      "minimax_h3_video_vae_fp16.safetensors",
+      "qwen3vl_32b_minimax_h3-Q2_K_M.gguf"
+    ]
+  },
+  "rx6800/minimax_music3_120s_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "ConditioningZeroOut",
+      "EmptyMiniMaxMusic3LatentAudio",
+      "KSampler",
+      "MiniMaxMusic3TextEncode",
+      "SaveAudioAdvanced",
+      "UNETLoader",
+      "VAEDecodeAudioTiled",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_music3_dav.safetensors",
+      "minimax_music3_dit_int8_convrot.safetensors",
+      "minimax_music3_text_encoder_pruned_int8_convrot.safetensors"
+    ]
+  },
+  "rx6800/minimax_music3_120s_full_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "ConditioningZeroOut",
+      "EmptyMiniMaxMusic3LatentAudio",
+      "KSampler",
+      "MiniMaxMusic3TextEncode",
+      "SaveAudioAdvanced",
+      "UNETLoader",
+      "VAEDecodeAudioTiled",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_music3_dav.safetensors",
+      "minimax_music3_dit_int8_convrot.safetensors",
+      "minimax_music3_text_encoder_pruned_int8_convrot.safetensors"
+    ]
+  },
+  "rx6800/minimax_music3_20s_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "ConditioningZeroOut",
+      "EmptyMiniMaxMusic3LatentAudio",
+      "KSampler",
+      "MiniMaxMusic3TextEncode",
+      "SaveAudioAdvanced",
+      "UNETLoader",
+      "VAEDecodeAudioTiled",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_music3_dav.safetensors",
+      "minimax_music3_dit_int8_convrot.safetensors",
+      "minimax_music3_text_encoder_pruned_int8_convrot.safetensors"
+    ]
+  },
+  "rx6800/qwen_image_21_og_s7201_1216x640_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "EmptyLatentImage",
+      "KSampler",
+      "SaveImage",
+      "TextEncodeQwenImage21",
+      "UNETLoader",
+      "VAEDecodeTiled",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "qwen3vl_8b_int8_convrot.safetensors",
+      "qwen_image_2.1_int8_convrot.safetensors",
+      "qwen_image_2.1_vae_bf16.safetensors"
+    ]
+  },
+  "rx6800/qwen_image_2512_og_local_ogp_1216x640_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "CLIPTextEncode",
+      "EmptySD3LatentImage",
+      "KSampler",
+      "SaveImage",
+      "UnetLoaderGGUF",
+      "VAEDecode",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "qwen-image-2512-Q4_K_M.gguf",
+      "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "qwen_image_vae.safetensors"
+    ]
+  },
+  "780m/hunyuan3d2mini_knight_fullbody_api.json": {
+    "nodes": [
+      "Hy3DExportMesh",
+      "Hy3DGenerateMesh",
+      "Hy3DModelLoader",
+      "Hy3DPostprocessMesh",
+      "Hy3DVAEDecode",
+      "LoadImage"
+    ],
+    "file_inputs": [
+      "rx6800_bench/rx6800_knight_front_518_masked.png"
+    ]
+  },
+  "780m/ltx23_512x288_97f_gpuvae_api.json": {
+    "nodes": [
+      "CreateVideo",
+      "EmptyLTXVLatentVideo",
+      "KSampler",
+      "LTXVAudioVAEDecode",
+      "LTXVConcatAVLatent",
+      "LTXVConditioning",
+      "LTXVEmptyLatentAudio",
+      "LTXVLoadConditioning",
+      "LTXVSeparateAVLatent",
+      "LTXVTiledVAEDecode",
+      "ModelSamplingLTXV",
+      "SaveVideo",
+      "UnetLoaderGGUF",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "ltx-2.3-22b-distilled-Q2_K.gguf",
+      "ltx-2.3-22b-distilled_audio_vae.safetensors",
+      "ltx-2.3-22b-distilled_video_vae.safetensors"
+    ]
+  },
+  "780m/ltx25_Q3_512x288_97f_25steps_gpuvae_api.json": {
+    "nodes": [
+      "CreateVideo",
+      "EmptyLTXVLatentVideo",
+      "KSamplerSelect",
+      "LTXVAudioVAEDecode",
+      "LTXVConcatAVLatent",
+      "LTXVConditioning",
+      "LTXVDualCFGGuider",
+      "LTXVEmptyLatentAudio",
+      "LTXVLoadConditioning",
+      "LTXVScheduler",
+      "LTXVSeparateAVLatent",
+      "LTXVTiledVAEDecode",
+      "ModelSamplingLTXV",
+      "RandomNoise",
+      "SamplerCustomAdvanced",
+      "SaveVideo",
+      "UnetLoaderGGUF",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "ltx-2.5-Q3_K_S.gguf",
+      "ltx-2.5-audio-vae-bf16.safetensors",
+      "ltx-2.5-video-vae-conv-bf16.safetensors"
+    ]
+  },
+  "780m/minimax_h3_q3kxl_t2va_640x384_turbo_api.json": {
+    "nodes": [
+      "BasicGuider",
+      "BasicScheduler",
+      "CLIPLoaderGGUF",
+      "CreateVideo",
+      "KSamplerSelect",
+      "LoraLoaderModelOnly",
+      "MiniMaxH3ImageToVideo",
+      "RandomNoise",
+      "SamplerCustomAdvanced",
+      "SaveVideo",
+      "UnetLoaderGGUF",
+      "VAEDecode",
+      "VAEDecodeAudio",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_h3_audio_vae_fp32.safetensors",
+      "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+      "minimax_h3_fl2va_pruned-UD-Q3_K_XL.gguf",
+      "minimax_h3_video_vae_fp16.safetensors",
+      "qwen3vl_32b_minimax_h3-Q2_K_M.gguf"
+    ]
+  },
+  "780m/minimax_h3_t2va_768x448_turbo_api.json": {
+    "nodes": [
+      "BasicGuider",
+      "BasicScheduler",
+      "CLIPLoaderGGUF",
+      "CreateVideo",
+      "KSamplerSelect",
+      "LoraLoaderModelOnly",
+      "MiniMaxH3ImageToVideo",
+      "RandomNoise",
+      "SamplerCustomAdvanced",
+      "SaveVideo",
+      "UnetLoaderGGUF",
+      "VAEDecode",
+      "VAEDecodeAudio",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_h3_audio_vae_fp32.safetensors",
+      "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+      "minimax_h3_fl2va_pruned-Q2_K.gguf",
+      "minimax_h3_video_vae_fp16.safetensors",
+      "qwen3vl_32b_minimax_h3-Q2_K_M.gguf"
+    ]
+  },
+  "780m/minimax_music3_120s_full_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "ConditioningZeroOut",
+      "EmptyMiniMaxMusic3LatentAudio",
+      "KSampler",
+      "MiniMaxMusic3TextEncode",
+      "SaveAudioAdvanced",
+      "UNETLoader",
+      "VAEDecodeAudioTiled",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_music3_dav.safetensors",
+      "minimax_music3_dit_int8_convrot.safetensors",
+      "minimax_music3_text_encoder_pruned_int8_convrot.safetensors"
+    ]
+  },
+  "780m/minimax_music3_20s_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "ConditioningZeroOut",
+      "EmptyMiniMaxMusic3LatentAudio",
+      "KSampler",
+      "MiniMaxMusic3TextEncode",
+      "SaveAudioAdvanced",
+      "UNETLoader",
+      "VAEDecodeAudioTiled",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "minimax_music3_dav.safetensors",
+      "minimax_music3_dit_int8_convrot.safetensors",
+      "minimax_music3_text_encoder_pruned_int8_convrot.safetensors"
+    ]
+  },
+  "780m/qwen_image_21_og_s7201_1216x640_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "EmptyLatentImage",
+      "KSampler",
+      "SaveImage",
+      "TextEncodeQwenImage21",
+      "UNETLoader",
+      "VAEDecodeTiled",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "qwen3vl_8b_int8_convrot.safetensors",
+      "qwen_image_2.1_int8_convrot.safetensors",
+      "qwen_image_2.1_vae_bf16.safetensors"
+    ]
+  },
+  "780m/qwen_image_2512_og_local_ogp_1216x640_api.json": {
+    "nodes": [
+      "CLIPLoader",
+      "CLIPTextEncode",
+      "EmptySD3LatentImage",
+      "KSampler",
+      "SaveImage",
+      "UnetLoaderGGUF",
+      "VAEDecode",
+      "VAELoader"
+    ],
+    "file_inputs": [
+      "qwen-image-2512-Q4_K_M.gguf",
+      "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "qwen_image_vae.safetensors"
+    ]
+  }
+}

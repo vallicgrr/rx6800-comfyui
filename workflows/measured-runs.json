@@ -1,0 +1,19 @@
+{
+  "note": "Final table Music rows; RX validation seeds avoid cached execution. Archived graph seeds remain 527001.",
+  "music_rows": [
+    {
+      "workflow": "minimax_music3_20s_api.json",
+      "rx_seed": 527121,
+      "rx_execution_seconds": 178.2,
+      "780m_seed": 527001,
+      "780m_execution_seconds": 470.5
+    },
+    {
+      "workflow": "minimax_music3_120s_full_api.json",
+      "rx_seed": 527124,
+      "rx_execution_seconds": 1157.9,
+      "780m_seed": 527001,
+      "780m_execution_seconds": 2886.4
+    }
+  ]
+}

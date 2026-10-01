@@ -1,0 +1,196 @@
+{
+ "3": {
+  "inputs": {
+   "vae_name": "ltx-2.3-22b-distilled_audio_vae.safetensors"
+  },
+  "class_type": "VAELoader"
+ },
+ "11": {
+  "inputs": {
+   "positive": [
+    "6",
+    0
+   ],
+   "cfg": 1.0,
+   "scheduler": "simple",
+   "denoise": 1.0,
+   "steps": 8,
+   "latent_image": [
+    "9",
+    0
+   ],
+   "sampler_name": "euler",
+   "seed": 680023,
+   "model": [
+    "10",
+    0
+   ],
+   "negative": [
+    "6",
+    1
+   ]
+  },
+  "class_type": "KSampler"
+ },
+ "13": {
+  "inputs": {
+   "working_dtype": "float32",
+   "vertical_tiles": 1,
+   "overlap": 1,
+   "horizontal_tiles": 1,
+   "last_frame_fix": false,
+   "working_device": "auto",
+   "latents": [
+    "12",
+    0
+   ],
+   "vae": [
+    "2",
+    0
+   ]
+  },
+  "class_type": "LTXVTiledVAEDecode"
+ },
+ "12": {
+  "inputs": {
+   "av_latent": [
+    "11",
+    0
+   ]
+  },
+  "class_type": "LTXVSeparateAVLatent"
+ },
+ "8": {
+  "inputs": {
+   "batch_size": 1,
+   "audio_vae": [
+    "3",
+    0
+   ],
+   "frame_rate": 24,
+   "frames_number": 97
+  },
+  "class_type": "LTXVEmptyLatentAudio"
+ },
+ "7": {
+  "inputs": {
+   "batch_size": 1,
+   "length": 97,
+   "width": 512,
+   "height": 288
+  },
+  "class_type": "EmptyLTXVLatentVideo"
+ },
+ "1": {
+  "inputs": {
+   "unet_name": "ltx-2.3-22b-distilled-Q2_K.gguf"
+  },
+  "class_type": "UnetLoaderGGUF"
+ },
+ "9": {
+  "inputs": {
+   "audio_latent": [
+    "8",
+    0
+   ],
+   "video_latent": [
+    "7",
+    0
+   ]
+  },
+  "class_type": "LTXVConcatAVLatent"
+ },
+ "2": {
+  "inputs": {
+   "vae_name": "ltx-2.3-22b-distilled_video_vae.safetensors"
+  },
+  "class_type": "VAELoader"
+ },
+ "6": {
+  "inputs": {
+   "negative": [
+    "5",
+    0
+   ],
+   "frame_rate": 24.0,
+   "positive": [
+    "4",
+    0
+   ]
+  },
+  "class_type": "LTXVConditioning"
+ },
+ "5": {
+  "inputs": {
+   "device": "cpu",
+   "file_name": "ltx23_blurry_negative.safetensors"
+  },
+  "class_type": "LTXVLoadConditioning",
+  "is_changed": [
+   "02ae66524c671a7d64bcaa6c318762edef3f76e1822c344dfcca5c001393bbaf"
+  ]
+ },
+ "10": {
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "base_shift": 0.95,
+   "max_shift": 2.05,
+   "latent": [
+    "9",
+    0
+   ]
+  },
+  "class_type": "ModelSamplingLTXV"
+ },
+ "4": {
+  "inputs": {
+   "device": "cpu",
+   "file_name": "ltx23_ball_positive.safetensors"
+  },
+  "class_type": "LTXVLoadConditioning",
+  "is_changed": [
+   "399f447497fe3976ac5a59188e163d63b93b2032e1c4ae976feee94a53cc073a"
+  ]
+ },
+ "16": {
+  "inputs": {
+   "video": [
+    "15",
+    0
+   ],
+   "format": "mp4",
+   "filename_prefix": "780m_bench/ltx23_512x288_97f_gpuvae"
+  },
+  "class_type": "SaveVideo"
+ },
+ "14": {
+  "inputs": {
+   "audio_vae": [
+    "3",
+    0
+   ],
+   "samples": [
+    "12",
+    1
+   ]
+  },
+  "class_type": "LTXVAudioVAEDecode"
+ },
+ "15": {
+  "inputs": {
+   "images": [
+    "13",
+    0
+   ],
+   "fps": 24.0,
+   "audio": [
+    "14",
+    0
+   ]
+  },
+  "class_type": "CreateVideo"
+ }
+}
